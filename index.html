@@ -4,74 +4,263 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prime Tuition — Student Arcade Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f6f9;
-      --card-bg: #ffffff;
-      --primary: #6633cc;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
+      --maroon-dark: #7d0c18;
+      --crimson: #b81423;
+      --crimson-hover: #96101c;
+      --rust-accent: #c8432b;
+      --gold: #d9a528;
+      --gold-soft: #fdf3d0;
+      --cream-bg: #fcf8f2;
+      --cream-card: #fffaf0;
+      --white: #ffffff;
+      --text-dark: #18181b;
+      --text-muted: #52525b;
+      --border-warm: #eadbc8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #fdfaf5 0%, #f8efe4 100%);
+      color: var(--text-dark);
       line-height: 1.5;
+      min-height: 100vh;
     }
 
-    header {
-      background: var(--primary);
-      color: #ffffff;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
+    /* Top Maroon Utility Bar */
+    .top-bar {
+      background: var(--maroon-dark);
+      color: var(--white);
+      font-size: 0.85rem;
+      padding: 0.55rem 1.5rem;
     }
 
-    header h1 { font-size: 2rem; margin-bottom: 0.4rem; }
-    header p { opacity: 0.9; font-size: 1rem; }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
 
+    .top-contact {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .top-contact a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.92;
+    }
+
+    .top-contact a:hover { opacity: 1; text-decoration: underline; }
+
+    .top-pill {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.25rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    /* White Main Navigation Bar */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-warm);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(125, 12, 24, 0.04);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .brand img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-fallback {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--crimson);
+      display: none;
+    }
+
+    .nav-cta {
+      background: var(--crimson);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.6rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--crimson-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cream-card);
+      border: 1px solid var(--border-warm);
+      padding: 0.3rem 0.9rem 0.3rem 0.4rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--maroon-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow-badge {
+      background: var(--crimson);
+      color: var(--white);
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .hero-label {
+      color: var(--crimson);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+      color: var(--text-dark);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--crimson), var(--rust-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    /* Games Grid */
     .gallery {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 1rem auto 4rem;
       padding: 0 1.5rem;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 1.75rem;
     }
 
     .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border-warm);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 24px rgba(125, 12, 24, 0.06);
       display: flex;
       flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(125, 12, 24, 0.1);
     }
 
     .card-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1.15rem 1.25rem;
+      border-bottom: 1px solid var(--border-warm);
+      background: var(--white);
     }
 
-    .card-header h2 { font-size: 1.15rem; margin-bottom: 0.25rem; }
-
-    .meta {
-      font-size: 0.85rem;
-      color: var(--muted);
+    .card-top-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .term-pill {
+      background: var(--gold-soft);
+      color: #855c00;
+      border: 1px solid #eed68a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .student-name {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
     }
 
     .sim-wrapper {
       position: relative;
       height: 0;
-      padding-bottom: 117.6%; /* MakeCode Arcade simulator aspect ratio */
+      padding-bottom: 117.6%;
       overflow: hidden;
-      background: #0f172a;
+      background: #18181b;
     }
 
     .sim-wrapper iframe {
@@ -84,36 +273,81 @@
     }
 
     .card-footer {
-      padding: 0.75rem 1.25rem;
-      background: #f8fafc;
-      border-top: 1px solid var(--border);
-      text-align: right;
+      padding: 0.85rem 1.25rem;
+      background: var(--cream-bg);
+      border-top: 1px solid var(--border-warm);
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .card-footer a {
-      color: var(--primary);
+    .play-link {
+      color: var(--crimson);
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
-    .card-footer a:hover { text-decoration: underline; }
+    .play-link:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      background: var(--maroon-dark);
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.88rem;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Prime Tuition Arcade Gallery</h1>
-    <p>Playable games built by our coding students in MakeCode Arcade</p>
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-contact">
+        <a href="tel:02033021524">&#128222; 0203 302 1524</a>
+        <a href="mailto:info@primetuition.co.uk">&#9993; info@primetuition.co.uk</a>
+      </div>
+      <span class="top-pill">Coding &amp; Robotics Showcase</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="brand">
+        <!-- Upload your logo as "logo.png" in the root of your GitHub repo -->
+        <img src="logo.png" alt="Prime Tuition Logo"
+             onerror="this.style.display='none'; document.querySelector('.brand-fallback').style.display='inline';">
+        <span class="brand-fallback">Prime Tuition</span>
+      </a>
+      <a href="https://primetuition.co.uk" target="_blank" rel="noopener" class="nav-cta">
+        Visit Main Website &rarr;
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="eyebrow">
+      <span class="eyebrow-badge">ARCADE</span>
+      Built by Prime Tuition coding students
+    </div>
+    <div class="hero-label">Prime Tuition Coding Club</div>
+    <h1>Student Games Gallery<br><span>built in MakeCode Arcade</span></h1>
+    <p>Play interactive retro games designed, coded, and published by our students. Click any simulator below to play directly in your browser.</p>
   </header>
 
+  <!-- Games Gallery -->
   <main class="gallery" id="gallery"></main>
+
+  <footer>
+    &copy; Prime Tuition &mdash; Student Coding &amp; MakeCode Arcade Showcase
+  </footer>
 
   <script>
     // =========================================================
     // ADD NEW STUDENT GAMES HERE
-    // Just paste the Share ID from the end of their MakeCode URL
-    // Example: https://arcade.makecode.com/S47326-05730-25883-02581
     // =========================================================
     const projects = [
       {
@@ -128,7 +362,7 @@
         term: "Autumn 2026",
         id: "S46187-36037-64941-94442"
       },
-      // Copy and uncomment the block below to add another game:
+      // Copy and uncomment to add more games:
       /*
       {
         title: "Space Dodger",
@@ -146,11 +380,11 @@
       card.className = "card";
       card.innerHTML = `
         <div class="card-header">
-          <h2>${p.title}</h2>
-          <div class="meta">
-            <span>By ${p.student}</span>
-            <span>${p.term}</span>
+          <div class="card-top-row">
+            <h2>${p.title}</h2>
+            <span class="term-pill">${p.term}</span>
           </div>
+          <div class="student-name">Created by ${p.student}</div>
         </div>
         <div class="sim-wrapper">
           <iframe
@@ -161,7 +395,7 @@
           </iframe>
         </div>
         <div class="card-footer">
-          <a href="https://arcade.makecode.com/${p.id}" target="_blank" rel="noopener">
+          <a class="play-link" href="https://arcade.makecode.com/${p.id}" target="_blank" rel="noopener">
             View Code / Fullscreen &rarr;
           </a>
         </div>
