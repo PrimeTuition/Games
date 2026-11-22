@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Tuition — Student Arcade Gallery</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+      --primary: #6633cc;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+    header p { opacity: 0.9; font-size: 1rem; }
+
+    .gallery {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 { font-size: 1.15rem; margin-bottom: 0.25rem; }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .sim-wrapper {
+      position: relative;
+      height: 0;
+      padding-bottom: 117.6%; /* MakeCode Arcade simulator aspect ratio */
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    .sim-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .card-footer {
+      padding: 0.75rem 1.25rem;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .card-footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .card-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Prime Tuition Arcade Gallery</h1>
+    <p>Playable games built by our coding students in MakeCode Arcade</p>
+  </header>
+
+  <main class="gallery" id="gallery"></main>
+
+  <script>
+    // =========================================================
+    // ADD NEW STUDENT GAMES HERE
+    // Just paste the Share ID from the end of their MakeCode URL
+    // Example: https://arcade.makecode.com/S47326-05730-25883-02581
+    // =========================================================
+    const projects = [
+      {
+        title: "Winter Snow Globe",
+        student: "Demo Project",
+        term: "Autumn 2026",
+        id: "S47326-05730-25883-02581"
+      },
+      // Copy and uncomment the block below to add another game:
+      /*
+      {
+        title: "Space Dodger",
+        student: "Alex M.",
+        term: "Autumn 2026",
+        id: "S00000-00000-00000-00000"
+      },
+      */
+    ];
+
+    const gallery = document.getElementById("gallery");
+
+    projects.forEach((p) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-header">
+          <h2>${p.title}</h2>
+          <div class="meta">
+            <span>By ${p.student}</span>
+            <span>${p.term}</span>
+          </div>
+        </div>
+        <div class="sim-wrapper">
+          <iframe
+            src="https://arcade.makecode.com/---run?id=${p.id}"
+            allowfullscreen="allowfullscreen"
+            sandbox="allow-popups allow-forms allow-scripts allow-same-origin"
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="card-footer">
+          <a href="https://arcade.makecode.com/${p.id}" target="_blank" rel="noopener">
+            View Code / Fullscreen &rarr;
+          </a>
+        </div>
+      `;
+      gallery.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
