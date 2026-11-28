@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prime Tuition — Student Arcade Gallery</title>
+  <title>Prime Tuition — Student Projects Gallery</title>
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,30 +139,7 @@
     .hero {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 2rem;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--cream-card);
-      border: 1px solid var(--border-warm);
-      padding: 0.3rem 0.9rem 0.3rem 0.4rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--maroon-dark);
-      margin-bottom: 1.25rem;
-    }
-
-    .eyebrow-badge {
-      background: var(--crimson);
-      color: var(--white);
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      padding: 3rem 1.5rem 1.5rem;
     }
 
     .hero-label {
@@ -194,10 +171,44 @@
       max-width: 650px;
     }
 
+    /* Filter Bar */
+    .filter-bar {
+      max-width: 1200px;
+      margin: 0.5rem auto 1.5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--white);
+      color: var(--text-dark);
+      border: 1px solid var(--border-warm);
+      padding: 0.5rem 1.15rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+
+    .filter-btn.active {
+      background: var(--crimson);
+      color: var(--white);
+      border-color: var(--crimson);
+    }
+
     /* Games Grid */
     .gallery {
       max-width: 1200px;
-      margin: 1rem auto 4rem;
+      margin: 0 auto 4rem;
       padding: 0 1.5rem;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
@@ -265,6 +276,11 @@
       background: #18181b;
     }
 
+    .sim-wrapper.scratch {
+      padding-bottom: 83%;
+      background: #ffffff;
+    }
+
     .sim-wrapper iframe {
       position: absolute;
       top: 0;
@@ -279,7 +295,14 @@
       background: var(--cream-bg);
       border-top: 1px solid var(--border-warm);
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .platform-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     .play-link {
@@ -318,7 +341,6 @@
   <nav class="navbar">
     <div class="navbar-inner">
       <a href="#" class="brand">
-        <!-- Upload your logo as "logo.png" in the root of your GitHub repo -->
         <img src="logo.png" alt="Prime Tuition Logo"
              onerror="this.style.display='none'; document.querySelector('.brand-fallback').style.display='inline';">
         <span class="brand-fallback">Prime Tuition</span>
@@ -332,80 +354,136 @@
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-label">Prime Tuition Coding Club</div>
-    <h1>Student Games Gallery<br><span>from Scratch to MakeCode & beyond</span></h1>
-    <p>Play interactive retro games designed, coded, and published by our students. Click any simulator below to play directly in your browser.</p>
+    <h1>Student Games Gallery<br><span>from Scratch to MakeCode &amp; beyond</span></h1>
+    <p>Play interactive retro games and Scratch creations designed, coded, and published by our students. Click any project below to play directly in your browser.</p>
   </header>
+
+  <!-- Category Filter Buttons -->
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="arcade">MakeCode Arcade</button>
+    <button class="filter-btn" data-filter="scratch">Scratch</button>
+  </div>
 
   <!-- Games Gallery -->
   <main class="gallery" id="gallery"></main>
 
   <footer>
-    &copy; Prime Tuition &mdash; Student Coding &amp; MakeCode Arcade Showcase
+    &copy; Prime Tuition &mdash; Student Coding &amp; Robotics Showcase
   </footer>
 
   <script>
     // =========================================================
-    // ADD NEW STUDENT GAMES HERE
+    // ADD NEW STUDENT PROJECTS HERE
+    // type: "arcade" (MakeCode) or "scratch" (Scratch)
     // =========================================================
     const projects = [
       {
+        type: "arcade",
         title: "Winter Snow Globe",
         student: "Demo Project",
         term: "Autumn 2026",
         id: "S47326-05730-25883-02581"
       },
       {
+        type: "arcade",
         title: "Dunk",
         student: "Demo Project",
         term: "Autumn 2026",
         id: "S46187-36037-64941-94442"
       },
       {
+        type: "arcade",
         title: "Chase Pizza",
         student: "Zinach",
         term: "Autumn 2026",
         id: "_PE60u94xfePh"
       },
-      // Copy and uncomment to add more games:
+      {
+        type: "scratch",
+        title: "Car Game",
+        student: "Dao",
+        term: "Autumn 2026",
+        id: "1392666398"
+      },
+      // Copy and uncomment to add Scratch projects:
       /*
       {
-        title: "Space Dodger",
-        student: "Alex M.",
+        type: "scratch",
+        title: "Maze Runner",
+        student: "Sam K.",
         term: "Autumn 2026",
-        id: "S00000-00000-00000-00000"
+        id: "1392666398"
       },
       */
     ];
 
     const gallery = document.getElementById("gallery");
+    const filterButtons = document.querySelectorAll(".filter-btn");
 
-    projects.forEach((p) => {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.innerHTML = `
-        <div class="card-header">
-          <div class="card-top-row">
-            <h2>${p.title}</h2>
-            <span class="term-pill">${p.term}</span>
+    function renderGallery(filter = "all") {
+      gallery.innerHTML = "";
+
+      const filtered = filter === "all"
+        ? projects
+        : projects.filter((p) => p.type === filter);
+
+      filtered.forEach((p) => {
+        const isScratch = p.type === "scratch";
+
+        const embedUrl = isScratch
+          ? `https://scratch.mit.edu/projects/${p.id}/embed`
+          : `https://arcade.makecode.com/---run?id=${p.id}`;
+
+        const projectUrl = isScratch
+          ? `https://scratch.mit.edu/projects/${p.id}/`
+          : `https://arcade.makecode.com/${p.id}`;
+
+        const wrapperClass = isScratch ? "sim-wrapper scratch" : "sim-wrapper";
+        const platformLabel = isScratch ? "Scratch" : "MakeCode Arcade";
+        const linkText = isScratch ? "Open on Scratch &rarr;" : "View Code / Fullscreen &rarr;";
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-header">
+            <div class="card-top-row">
+              <h2>${p.title}</h2>
+              <span class="term-pill">${p.term}</span>
+            </div>
+            <div class="student-name">Created by ${p.student}</div>
           </div>
-          <div class="student-name">Created by ${p.student}</div>
-        </div>
-        <div class="sim-wrapper">
-          <iframe
-            src="https://arcade.makecode.com/---run?id=${p.id}"
-            allowfullscreen="allowfullscreen"
-            sandbox="allow-popups allow-forms allow-scripts allow-same-origin"
-            loading="lazy">
-          </iframe>
-        </div>
-        <div class="card-footer">
-          <a class="play-link" href="https://arcade.makecode.com/${p.id}" target="_blank" rel="noopener">
-            View Code / Fullscreen &rarr;
-          </a>
-        </div>
-      `;
-      gallery.appendChild(card);
+          <div class="${wrapperClass}">
+            <iframe
+              src="${embedUrl}"
+              allowtransparency="true"
+              allowfullscreen="allowfullscreen"
+              sandbox="allow-popups allow-forms allow-scripts allow-same-origin"
+              scrolling="no"
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="card-footer">
+            <span class="platform-tag">${platformLabel}</span>
+            <a class="play-link" href="${projectUrl}" target="_blank" rel="noopener">
+              ${linkText}
+            </a>
+          </div>
+        `;
+        gallery.appendChild(card);
+      });
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderGallery(btn.dataset.filter);
+      });
     });
+
+    // Initial render
+    renderGallery("all");
   </script>
 
 </body>
